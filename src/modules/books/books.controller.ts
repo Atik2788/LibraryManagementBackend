@@ -135,7 +135,14 @@ const getBookById = async(req: Request, res: Response)=>{
 
 const updateBookById = async(req: Request, res: Response)=>{
     try {
+
         const updateBookId = req.params.bookId;
+
+        if(req.body.copies !== undefined){
+          const copies = Number(req.body.copies);
+          req.body.available = copies > 0 ? true : false
+        }
+
         const data = await Book.findOneAndUpdate({_id: updateBookId}, req.body, {new: true})
 
         res.send({

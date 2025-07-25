@@ -85,6 +85,108 @@ npm run dev
 ```
 
 🧪 API Endpoints <br>
+https://librarymanagementsystem-dun.vercel.app/
+
+🔹 POST /api/books <br>
+Purpose: Create book in books collection
+```bash
+{
+  "title": "The Theory of Everything",
+  "author": "Stephen Hawking",
+  "genre": "SCIENCE",
+  "isbn": "9780553380163",
+  "description": "An overview of cosmology and black holes.",
+  "copies": 5,
+  "available": true
+}
+```
+```bash
+Response (Success):
+{
+  "success": true,
+  "message": "Book created successfully",
+  "data": {
+    "_id": "64f123abc4567890def12345",
+    "title": "The Theory of Everything",
+    "author": "Stephen Hawking",
+    "genre": "SCIENCE",
+    "isbn": "9780553380163",
+    "description": "An overview of cosmology and black holes.",
+    "copies": 5,
+    "available": true,
+    "createdAt": "2024-11-19T10:23:45.123Z",
+    "updatedAt": "2024-11-19T10:23:45.123Z"
+  }
+
+  ```
+
+  🔹 GET /api/books <br>
+Purpose: Get All books <br>
+/api/books?filter=FANTASY&sortBy=createdAt&sort=desc&limit=5
+```bash
+Response:
+{
+  "success": true,
+  "message": "Books retrieved successfully",
+  "data": [
+    {
+      "_id": "64f123abc4567890def12345",
+      "title": "The Theory of Everything",
+      "author": "Stephen Hawking",
+      "genre": "SCIENCE",
+      "isbn": "9780553380163",
+      "description": "An overview of cosmology and black holes.",
+      "copies": 5,
+      "available": true,
+      "createdAt": "2024-11-19T10:23:45.123Z",
+      "updatedAt": "2024-11-19T10:23:45.123Z"
+    }
+    {...}
+  ]
+}
+```
+
+
+🔹 PUT /api/books <br>
+Purpose: Update Book
+```bash
+Request Body:
+{
+  "copies": 50
+}
+```
+
+```bash
+{
+  "success": true,
+  "message": "Book updated successfully",
+  "data": {
+    "_id": "64f123abc4567890def12345",
+    "title": "The Theory of Everything",
+    "author": "Stephen Hawking",
+    "genre": "SCIENCE",
+    "isbn": "9780553380163",
+    "description": "An overview of cosmology and black holes.",
+    "copies": 50,
+    "available": true,
+    "createdAt": "2024-11-19T10:23:45.123Z",
+    "updatedAt": "2024-11-20T08:30:00.000Z"
+  }
+
+```
+🔹 DELETE /api/books:bookId <br>
+Purpose: Delete Book
+
+```bash
+{
+  "success": true,
+  "message": "Book deleted successfully",
+  "data": null
+}
+
+```
+
+
 🔹 POST /api/borrow <br>
 Purpose: Borrow a book
 ```bash

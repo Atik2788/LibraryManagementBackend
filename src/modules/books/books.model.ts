@@ -47,9 +47,9 @@ bookSchema.statics.updateStockAfterBorrow = async function ( bookId: string, qua
 
   book.copies -= quantity;
 
-//   if (book.copies === 0) {
-//     book.available = false;
-//   }
+  // if (book.copies === 0) {
+  //   book.available = false;
+  // }
 
   await book.save();
 };
