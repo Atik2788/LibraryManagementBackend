@@ -85,7 +85,7 @@ npm run dev
 ```
 
 🧪 API Endpoints <br>
-https://librarymanagementsystem-dun.vercel.app/
+https://librarymanagementbackend-production-2084.up.railway.app
 
 🔹 POST /api/books <br>
 Purpose: Create book in books collection
