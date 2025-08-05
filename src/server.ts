@@ -16,20 +16,35 @@ app.get('/', (req, res) =>{
     res.send("Server running")
 })
 
-app.listen(port, () =>{    
-    console.log(`server running on port: ${port}`);
-})
+// app.listen(port, () =>{    
+//     console.log(`server running on port: ${port}`);
+// })
 
-
-async function server() {
-    try {
+async function main() {
+    try{
         await mongoose.connect(config.database_url!)
-
-
         console.log(`connect to database on port ${port}`);
-    } catch (error) {
-        console.error(`server error: ${error}`);
+
+            app.listen(port, () =>{    
+        console.log(`server running on port: ${port}`);
+            })
+    }
+    catch(error){
+        console.error('❌ Database connection failed:', error);
     }
 }
 
-server()
+
+// async function server() {
+//     try {
+//         await mongoose.connect(config.database_url!)
+
+
+//         console.log(`connect to database on port ${port}`);
+//     } catch (error) {
+//         console.error(`server error: ${error}`);
+//     }
+// }
+
+// server()
+main()
