@@ -7,7 +7,11 @@ const port = config.port;
 
 const app = express()
 
-app.use(cors())
+app.use(cors(
+    {
+    origin: ['http://localhost:5000', 'https://librarymanagementbackend-production-2084.up.railway.app/']
+   }
+))
 app.use(express.json())
 
 app.use(routes)
