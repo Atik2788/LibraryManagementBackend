@@ -143,7 +143,7 @@ const updateBookById = async(req: Request, res: Response)=>{
           req.body.available = copies > 0 ? true : false
         }
 
-        const data = await Book.findOneAndUpdate({_id: updateBookId}, req.body, {new: true})
+        const data = await Book.findOneAndUpdate({_id: updateBookId}, req.body, {new: true, runValidators: true});
 
         res.send({
         success: true,
