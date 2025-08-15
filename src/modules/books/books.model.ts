@@ -7,17 +7,11 @@ const bookSchema = new Schema<IBook, BookModel>(
     author: { type: String, required: [true, "Author missing"], trim: true },
     genre: {
       type: String,
+      required: [true, "Genre is required"],
       enum: {
-        values: ["FICTION",
-        "NON_FICTION",
-        "SCIENCE",
-        "HISTORY",
-        "BIOGRAPHY",
-        "FANTASY"
-        ],
-      message: "`{VALUE}` is not a valid genre. Use one of: [FICTION, NON_FICTION, SCIENCE, HISTORY, BIOGRAPHY, FANTASY]",
-    },
-      required: true,
+        values: ["FICTION","NON_FICTION","SCIENCE","HISTORY","BIOGRAPHY","FANTASY"],
+        message: "`{VALUE}` is not a valid genre. Use one of: [FICTION, NON_FICTION, SCIENCE, HISTORY, BIOGRAPHY, FANTASY]"
+      }
     },
     isbn: {
       type: String,
