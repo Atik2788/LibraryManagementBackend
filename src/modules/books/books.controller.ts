@@ -133,31 +133,51 @@ const getBookById = async(req: Request, res: Response)=>{
 }
 }
 
-const updateBookById = async(req: Request, res: Response)=>{
-    try {
+const updateBookById = async (req: Request, res: Response) => {
+  try {
+    const updateBookId = req.params.bookId;
 
-        const updateBookId = req.params.bookId;
+    const book = await Book.findById(updateBookId);
+    if (!book) {
+      return res.status(404).send({
+        success: false,
+        message: "Book not found",
+      });
+    }
 
-        if(req.body.copies !== undefined){
-          const copies = Number(req.body.copies);
-          req.body.available = copies > 0 ? true : false
-        }
+    Object.assign(book, req.body);
 
-        const data = await Book.findOneAndUpdate({_id: updateBookId}, req.body, {new: true, runValidators: true});
+    // copies -> available auto
+    if (book.copies !== undefined) {
+      book.available = book.copies > 0;
+    }
 
-        res.send({
-        success: true,
-        message: "Books updated successfully",
-        data,
-        });
-        
-    } catch (error) {
-       res.send({
+    await book.save(); // triggers validation
+
+    res.send({
+      success: true,
+      message: "Books updated successfully",
+      data: book,
+    });
+    
+  } catch (error: any) {
+    if (error.name === "ValidationError") {
+      const errors = Object.values(error.errors).map((err: any) => err.message);
+      return res.status(400).send({
+        success: false,
+        message: "Validation Error from update book",
+        errors,
+      });
+    }
+
+    res.status(500).send({
       success: false,
       message: "Something went wrong in updating book data",
-      error,
-    })}
-}
+      error: error.message || error,
+    });
+  }
+};
+
 
 const deleteBookById = async(req: Request, res: Response)=>{
     try {
